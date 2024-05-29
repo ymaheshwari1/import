@@ -86,7 +86,7 @@ const actions: ActionTree<StockState, RootState> = {
     }, {});
     const facilityIds = externalFacilityIds.map((externalFacilityId: any) => facilityMapping[externalFacilityId]).filter((facilityId: any) => facilityId);
     const cachedProducts = await store.dispatch("product/fetchProducts", payload);
-    
+
     const initial = items.map((item: any) => {
       const product = cachedProducts[item.product];
       
@@ -154,14 +154,6 @@ const actions: ActionTree<StockState, RootState> = {
         resp = await StockService.scheduleJob({ ...payload });
         if (resp.status == 200 && !hasError(resp)) {
           showToast(translate('Service has been scheduled'));
-          // await dispatch('fetchJobs', {
-          //   inputFields: {
-          //     'systemJobEnumId': payload.systemJobEnumId,
-          //     'systemJobEnumId_op': 'equals',
-          //   },
-          //   orderBy: "runTime ASC"
-          // })
-          router.push('/scheduled-restock')
         } else {
           showToast(translate('Something went wrong'))
         }
